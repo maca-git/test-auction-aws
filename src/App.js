@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Amplify, { API } from "aws-amplify";
+import Amplify, { API, Storage } from "aws-amplify";
 import awsconfig from './aws-exports'
 import { Authenticator, withAuthenticator } from '@aws-amplify/ui-react'
 import { listLots } from './graphql/queries';
@@ -11,6 +11,7 @@ Amplify.configure(awsconfig)
 
 function App() {
   const [lots, setLots] = useState([])
+  const [lotImageUrl, setLotImageUrl] = useState('')
 
   const fetchLots = async () => {
     try {
@@ -18,6 +19,15 @@ function App() {
       setLots(data.listLots.items);
     } catch(e) {
       console.log(e);
+    }
+  }
+
+  const getFileAccessURL = async (path) => {
+    try {
+      const storageUrl = await Storage.get(path, { expires: 60 })
+      setLotImageUrl(storageUrl)
+    } catch (e) {
+      console.log(e)
     }
   }
   
@@ -37,14 +47,17 @@ function App() {
       </Authenticator>
       </header>
       {
-        lots?.map((lot) => (
-          <>
-            <div>{lot.title}</div>
-            <div>{lot.description}</div>
-            <div>{lot.currentPrice}</div>
-            <img src={lot.imageUrl} alt="" style={{width: '100px'}}/>
-          </>
-        ))
+        lots?.map((lot) => {
+          getFileAccessURL(lot.imageUrl)
+          return (
+            <div key={lot.id}>
+              <div>{lot.title}</div>
+              <div>{lot.description}</div>
+              <div>{lot.currentPrice}</div>
+              <img src={lotImageUrl} alt="" style={{width: '100px'}}/>
+            </div>
+          )
+        })
       }
     </div>
   );

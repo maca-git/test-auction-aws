@@ -1,0 +1,16 @@
+{
+  "resourceName": "lotImagesStorage",
+  "policyUUID": "8bfad556",
+  "bucketName": "testauctionaws197d7479357345c69ad995070714d64e",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

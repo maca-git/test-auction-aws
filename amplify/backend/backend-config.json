@@ -61,5 +61,12 @@
         }
       }
     }
+  },
+  "storage": {
+    "lotImagesStorage": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }
