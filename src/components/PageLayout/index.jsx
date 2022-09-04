@@ -1,9 +1,10 @@
+import { Container } from '@mui/material'
 import React from 'react'
 
 export const PageLayout = ({ children }) => {
   return (
     <>
-      <article className="page">{children}</article>
+      <Container maxWidth="lg">{children}</Container>
     </>
   )
 }

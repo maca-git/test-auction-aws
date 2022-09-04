@@ -1,0 +1,12 @@
+.lots-list {
+  display: flex;
+}
+.lot-item {
+  padding: 20px;
+  margin: 20px;
+}
+.lot-main-img {
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+}

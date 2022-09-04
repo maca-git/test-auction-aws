@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import Paper from '@mui/material/Paper'
+import { Typography } from '@mui/material'
 import { API, Storage } from 'aws-amplify'
 import { listLots } from '../../graphql/queries'
+
+import './index.css'
 
 export const LotList = () => {
   const [lots, setLots] = useState([])
@@ -29,18 +33,18 @@ export const LotList = () => {
   }, [])
 
   return (
-    <>
+    <div className="lots-list">
       {lots?.map((lot) => {
         getFileAccessURL(lot.imageUrl)
         return (
-          <div key={lot.id}>
-            <div>{lot.title}</div>
-            <div>{lot.description}</div>
-            <div>{lot.currentPrice}</div>
-            <img src={lotImageUrl} alt="" style={{ width: '100px' }} />
-          </div>
+          <Paper key={lot.id} className="lot-item">
+            <Typography>{lot.title}</Typography>
+            <img src={lotImageUrl} alt="" className="lot-main-img" />
+            <Typography>{lot.description}</Typography>
+            <Typography>Ціна: {lot.currentPrice}</Typography>
+          </Paper>
         )
       })}
-    </>
+    </div>
   )
 }
