@@ -1,0 +1,42 @@
+export const createLotFields = {
+  lotTitle: {
+    type: 'text',
+    name: 'lotTitle',
+    label: 'Назва',
+    variant: 'outlined',
+    required: true,
+    disabled: false,
+  },
+  lotDescription: {
+    type: 'text',
+    name: 'lotDescription',
+    label: 'Опис',
+    variant: 'outlined',
+    required: true,
+    disabled: false,
+  },
+  lotImageUrl: {
+    type: 'file',
+    name: 'lotImageUrl',
+    label: 'Зображення',
+    variant: 'outlined',
+    required: true,
+    disabled: false,
+  },
+  lotStartPrice: {
+    type: 'number',
+    name: 'lotStartPrice',
+    label: 'Початкова ціна',
+    variant: 'outlined',
+    required: true,
+    disabled: false,
+  },
+  lotMinStep: {
+    type: 'number',
+    name: 'lotMinStep',
+    label: 'Мінімальний крок',
+    variant: 'outlined',
+    required: true,
+    disabled: false,
+  },
+}
