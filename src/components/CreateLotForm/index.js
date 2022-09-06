@@ -9,6 +9,7 @@ import { useFormData } from '../../hooks/useFormData'
 
 import { createLotFields } from '../../constants/forms/lot'
 import { TextFormField } from '../FormFields/TextFormField'
+import { InputFileFormField } from '../FormFields/InputFileFormField'
 
 export const CreateLotForm = ({ onSuccessCreateLot }) => {
   const { formSchema } = useValidation(createLotRequiredFields)
@@ -18,19 +19,20 @@ export const CreateLotForm = ({ onSuccessCreateLot }) => {
     lotTitle: '',
     lotDescription: '',
     lotImageUrl: '',
-    lotStartPrice: 1,
-    lotMinStep: 1,
+    lotStartPrice: 0,
+    lotMinStep: 0,
   }
 
-  const { values, handleSubmit, handleChange, handleBlur, errors, touched } = useFormik({
-    initialValues: createLotInitialData,
+  const { values, handleSubmit, handleChange, handleBlur, errors, touched, setFieldValue } =
+    useFormik({
+      initialValues: createLotInitialData,
 
-    validationSchema: formSchema,
+      validationSchema: formSchema,
 
-    onSubmit: () => {
-      onSuccessCreateLot(values)
-    },
-  })
+      onSubmit: () => {
+        onSuccessCreateLot(values)
+      },
+    })
 
   useEffect(() => {
     checkIsDataChanged(values, createLotInitialData)
@@ -45,13 +47,31 @@ export const CreateLotForm = ({ onSuccessCreateLot }) => {
       {Object.values(createLotFields).map((fieldProps, index) => {
         return (
           <Fragment key={index}>
-            <TextFormField
-              {...fieldProps}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              error={errors[fieldProps.name]}
-              touched={touched[fieldProps.name]}
-            />
+            {fieldProps.type === 'text' && (
+              <TextFormField
+                {...fieldProps}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                error={errors[fieldProps.name]}
+                touched={touched[fieldProps.name]}
+              />
+            )}
+            {fieldProps.type === 'number' && (
+              <TextFormField
+                {...fieldProps}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                error={errors[fieldProps.name]}
+                touched={touched[fieldProps.name]}
+              />
+            )}
+            {fieldProps.type === 'file' && (
+              <InputFileFormField
+                {...fieldProps}
+                error={errors[fieldProps.name]}
+                setFieldValue={setFieldValue}
+              />
+            )}
           </Fragment>
         )
       })}

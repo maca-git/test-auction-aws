@@ -8,21 +8,16 @@ import './index.css'
 
 export const LotList = () => {
   const [lots, setLots] = useState([])
-  const [lotImageUrl, setLotImageUrl] = useState('')
 
   const fetchLots = async () => {
     try {
       const { data } = await API.graphql({ query: listLots, authMode: 'API_KEY' })
+      const lotsRequest = data.listLots.items.map((lot) => Storage.get(lot.imageUrl))
+      const lotsData = await Promise.all(lotsRequest)
+      data.listLots.items.forEach((lot, i) => {
+        lot.imageUrl = lotsData[i]
+      })
       setLots(data.listLots.items)
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  const getFileAccessURL = async (path) => {
-    try {
-      const storageUrl = await Storage.get(path, { expires: 60 })
-      setLotImageUrl(storageUrl)
     } catch (e) {
       console.log(e)
     }
@@ -35,11 +30,10 @@ export const LotList = () => {
   return (
     <div className="lots-list">
       {lots?.map((lot) => {
-        getFileAccessURL(lot.imageUrl)
         return (
           <Paper key={lot.id} className="lot-item">
             <Typography>{lot.title}</Typography>
-            <img src={lotImageUrl} alt="" className="lot-main-img" />
+            <img src={lot.imageUrl} alt="" className="lot-main-img" />
             <Typography>{lot.description}</Typography>
             <Typography>Ціна: {lot.currentPrice}</Typography>
           </Paper>

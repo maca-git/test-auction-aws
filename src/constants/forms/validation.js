@@ -8,6 +8,8 @@ export const validation = {
   requiredLotDescriptionError: "Обов'язкове поле 'Опис' не заповнене.",
 
   requiredLotImageUrlError: "Обов'язкове поле 'Зображення' не заповнене.",
+  lotImageMaxSizeError: 'Завантажте файл менший ніж 100 кб',
+  lotImageMaxSize: 100000,
 
   minLotStartPrice: 1,
   minLotStartPriceError: 'Початкова ціна не може бути меншою ніж 1',

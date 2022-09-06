@@ -1,5 +1,6 @@
 .lots-list {
   display: flex;
+  flex-wrap: wrap;
 }
 .lot-item {
   padding: 20px;
