@@ -12,6 +12,7 @@ import Tooltip from '@mui/material/Tooltip'
 import { MenuItem } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link } from 'react-router-dom'
+import { Auth } from 'aws-amplify'
 import { navbarItems, settingsItems } from '../../constants/navigation'
 
 const Header = () => {
@@ -31,6 +32,14 @@ const Header = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
+  }
+
+  const logout = async () => {
+    try {
+      await Auth.signOut()
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -117,6 +126,9 @@ const Header = () => {
                   </Link>
                 </MenuItem>
               ))}
+              <MenuItem onClick={logout}>
+                <Typography textAlign="center">Вийти</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

@@ -14,8 +14,4 @@ export const settingsItems = [
     name: 'Створити лот',
     path: '/create-lot',
   },
-  {
-    name: 'Вийти',
-    path: '/logout',
-  },
 ]
