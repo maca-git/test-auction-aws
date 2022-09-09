@@ -16,7 +16,6 @@ function App() {
       <Authenticator>
         {({ signOut, user }) => (
           <main>
-            <button onClick={signOut}>Sign out</button>
             <AppRouter />
           </main>
         )}
