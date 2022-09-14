@@ -1,11 +1,17 @@
 import React from 'react'
 import { v4 as uuid } from 'uuid'
+import { Auth, API, Storage } from 'aws-amplify'
+
 import { Typography } from '@mui/material'
-import { API, Storage } from 'aws-amplify'
+
 import { CreateLotForm } from '../../components/CreateLotForm'
 import { createLot } from '../../graphql/mutations'
 
 export const CreateLotPage = () => {
+  const {
+    user: { username },
+  } = Auth
+
   const onSuccessCreateLot = async ({
     lotTitle,
     lotStartPrice,
@@ -24,7 +30,7 @@ export const CreateLotPage = () => {
       startPrice: lotStartPrice,
       currentPrice: lotStartPrice,
       minStep: lotMinStep,
-      owner: '11a071f7-8092-4340-8e20-61e880a48133',
+      owner: username,
     }
 
     console.log(createLotInput)

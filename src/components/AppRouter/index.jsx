@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { CreateLotPage } from '../../pages/CreateLot'
 import { LotList } from '../../pages/LotList'
+import { Profile } from '../../pages/Profile'
 import { PageLayout } from '../PageLayout'
 
 export const routesConfiguration = {
@@ -12,6 +13,10 @@ export const routesConfiguration = {
   lotList: {
     path: '/lots',
     Element: LotList,
+  },
+  profile: {
+    path: '/profile',
+    Element: Profile,
   },
 }
 
